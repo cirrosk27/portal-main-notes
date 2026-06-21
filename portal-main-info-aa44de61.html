@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看球直播 · 故事始末</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f9fd;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #1a2b3c;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page {
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 36px 36px 28px 28px;
+            box-shadow: 0 12px 30px rgba(0, 40, 50, 0.08);
+            overflow: hidden;
+            padding: 2.2rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 0.8rem; }
+            .page { padding: 1.6rem 1.2rem; border-radius: 24px; }
+        }
+
+        /* 叙事开场 */
+        .story-opener {
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #e2f0f5 0%, #d2e9ef 100%);
+            padding: 1.8rem 1.8rem;
+            border-radius: 32px 16px 32px 16px;
+            margin-bottom: 2.2rem;
+            color: #0a2e3a;
+            border-left: 4px solid #1b8a9c;
+            box-shadow: 0 2px 6px rgba(27, 138, 156, 0.08);
+        }
+
+        .story-opener span {
+            background: #ffffffc0;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #116b7a;
+        }
+
+        /* 承接段落 */
+        .transition-text {
+            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            padding: 0 0.2rem;
+            color: #1f3e4a;
+            border-bottom: 1px dashed #b6d6df;
+            padding-bottom: 1.4rem;
+        }
+
+        .transition-text a {
+            color: #1b788b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #78bfcf;
+            padding-bottom: 1px;
+            transition: border-color 0.2s, background 0.15s;
+        }
+
+        .transition-text a:hover {
+            border-bottom-color: #0a5b6b;
+            background: #e1f1f5;
+        }
+
+        /* 网格卡片 —— 特点列表 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+            margin: 2.8rem 0 2.2rem 0;
+        }
+
+        .feature-card {
+            background: #f4fbfd;
+            border-radius: 28px;
+            padding: 1.6rem 1.4rem 1.4rem 1.4rem;
+            box-shadow: 0 4px 12px rgba(44, 130, 145, 0.06);
+            border: 1px solid #d9eaf0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(27, 138, 156, 0.12);
+            border-color: #b1dbe8;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f4f5e;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-card h3::before {
+            content: "◆";
+            color: #298e9e;
+            font-size: 1rem;
+            margin-right: 0.4rem;
+            opacity: 0.7;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #1f4451;
+            line-height: 1.6;
+        }
+
+        /* 温和结尾区块 */
+        .gentle-closing {
+            margin-top: 2.5rem;
+            padding: 1.8rem 1.6rem;
+            background: #e9f3f7;
+            border-radius: 40px 12px 40px 12px;
+            background-image: radial-gradient(circle at 10% 90%, #d0e7ee, #e9f3f7 70%);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem;
+        }
+
+        .closing-message {
+            flex: 2 1 200px;
+            font-size: 1.05rem;
+            color: #1f3e48;
+        }
+
+        .closing-message strong {
+            color: #0b5b6b;
+            font-weight: 600;
+        }
+
+        .closing-link {
+            flex: 1 1 140px;
+            text-align: center;
+        }
+
+        .closing-link a {
+            display: inline-block;
+            background: #1b8a9c;
+            color: white;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.7rem 1.6rem;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(27, 138, 156, 0.25);
+            transition: background 0.2s, transform 0.15s;
+            letter-spacing: 0.02em;
+        }
+
+        .closing-link a:hover {
+            background: #0f6b7a;
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(27, 138, 156, 0.35);
+        }
+
+        /* 脚注或提示小字 */
+        .footnote {
+            margin-top: 2.8rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6d8c96;
+            border-top: 1px solid #daeaf0;
+            padding-top: 1.2rem;
+        }
+
+        .footnote span {
+            background: #ecf5f9;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #cfe2e9;
+            margin: 1.2rem 0;
+        }
+
+        /* 小屏适应 */
+        @media (max-width: 480px) {
+            .story-opener { font-size: 1.3rem; padding: 1.2rem; }
+            .feature-grid { gap: 1.2rem; }
+            .gentle-closing { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 开场短句：叙事感 -->
+        <div class="story-opener">
+            <span>⚽ 看球的人，总在寻找一处</span> 能同时安放热情与从容的地方。
+        </div>
+
+        <!-- 承接段落：从主题展开 -->
+        <div class="transition-text">
+            几年前的一个深夜，朋友发来消息说，终于找到一个不用反复切换、画质稳定的看球去处。后来这句话被提起很多次。其实每个人心里都有一份清单：流畅、清晰、及时的比分，和那些不经意间出现的熟悉解说。慢慢地，这份清单指向了同一个名字 —— <a href="https://portal-main-kanqiu.com">看球直播</a>。它不是一个突然出现的站点，而是从一次次直播里长出来的聚合地。没有夸张的标语，只有每场球赛踏实的呈现。
+        </div>
+
+        <!-- 特点列表 (网格卡片) -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>多路信号</h3>
+                <p>覆盖主流联赛与焦点赛事，提供不同解说与视角的选择，总能找到合拍的那一路。</p>
+            </div>
+            <div class="feature-card">
+                <h3>低延迟提醒</h3>
+                <p>进球、红牌、点球 —— 实时推送关键事件，不再错过比赛转折，刷新节奏友好。</p>
+            </div>
+            <div class="feature-card">
+                <h3>赛事日历</h3>
+                <p>按日期、联赛整理赛程，一眼看清今夜明晨的重要对决，方便提前安排时间。</p>
+            </div>
+            <div class="feature-card">
+                <h3>社区简评</h3>
+                <p>每场比赛下方设有简洁讨论区，没有信息轰炸，只有球迷间真实的即时感受。</p>
+            </div>
+        </div>
+
+        <!-- 温和结尾 + 链接自然嵌入 -->
+        <div class="gentle-closing">
+            <div class="closing-message">
+                <strong>📺 适合一个人看，也适合约上老友一起。</strong><br>
+                每周都有熟悉的联赛和意想不到的冷门，而那个从深夜一直亮着的小窗，就是<a href="https://portal-main-kanqiu.com" style="color: #0b5b6b; text-decoration: underline; text-underline-offset: 4px; font-weight: 500;">看球直播</a> —— 不用刻意记住，需要的时候它总在那里。
+            </div>
+            <div class="closing-link">
+                <a href="https://portal-main-kanqiu.com">看球直播</a>
+            </div>
+        </div>
+
+        <!-- 简洁 FAQ 摘要 / 提示 -->
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; color: #2b5d6b; font-size: 0.9rem;">
+            <span style="background: #e7f2f6; padding: 0.3rem 1rem; border-radius: 40px;">📌 无需注册即可浏览赛程</span>
+            <span style="background: #e7f2f6; padding: 0.3rem 1rem; border-radius: 40px;">📌 移动端适配顺手</span>
+            <span style="background: #e7f2f6; padding: 0.3rem 1rem; border-radius: 40px;">📌 数据更新及时</span>
+        </div>
+
+        <div class="footnote">
+            <span>· 从一场直播到另一场 · 故事还在继续 ·</span>
+        </div>
+    </div>
+</body>
+</html>
